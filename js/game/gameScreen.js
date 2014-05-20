@@ -43,14 +43,14 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
             Player.update(dt);
             for (var i = 0; i < enemies.length; i++) {
                 enemies[i].update(dt, Player);
-                if (utils.dist(Player.getX(), Player.getY(), enemies[i].getX(), enemies[i].getY()) < 15) {
-                    if (Player.isLunging() && !enemies[i].isLunging()) {
-                        emitters.push(new particleEmitter(enemies[i].getX(), enemies[i].getY(), 10, particle.particle, 1));
+                if (utils.dist(Player.pos.x, Player.pos.y, enemies[i].pos.x, enemies[i].pos.y) < 15) {
+                    if (Player.lunging && !enemies[i].lunging) {
+                        emitters.push(new particleEmitter(enemies[i].pos.x, enemies[i].pos.y, 10, particle.particle, 1));
                         enemies[i] = null;
                         enemies.splice(i, 1); // Remove enemy at index i
                         i--;
                         score += 1;
-                    } else if (enemies[i].isLunging() && !Player.isLunging()) {
+                    } else if (enemies[i].lunging && !Player.lunging) {
                         playing = false;
                     }
                 }
@@ -64,7 +64,7 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
             }
             if (timer2 > 2) {
                 enemies.push(new enemy());
-                emitters.push(new particleEmitter(enemies[i].getX(), enemies[i].getY(), 20, particle.cloudParticle, 2));
+                emitters.push(new particleEmitter(enemies[i].pos.x, enemies[i].pos.y, 20, particle.cloudParticle, 2));
                 timer2 = 0;
             }
             timer2 += dt;

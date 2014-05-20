@@ -40,13 +40,13 @@ define(["utils/utils"], function(utils) {
     };
 
     Enemy.prototype.update = function(dt, Player) {
-        if (utils.dist(this.pos.x, this.pos.y, Player.getX(), Player.getY()) < 100 && !this.waiting && !this.lunging) {
+        if (utils.dist(this.pos.x, this.pos.y, Player.pos.x, Player.pos.y) < 100 && !this.waiting && !this.lunging) {
             this.waiting = true;
             this.timer = 0;
             this.oldPos = new Vector2D(this.pos.x, this.pos.y);
         }
         if (!this.lunging) {
-            this.vel = new Vector2D(Player.getX(), Player.getY());
+            this.vel = new Vector2D(Player.pos.x, Player.pos.y);
             this.vel.subtractEquals(this.pos);
             this.vel.unitEquals();
             this.vel.multiplyEquals(this.speed);
@@ -69,18 +69,6 @@ define(["utils/utils"], function(utils) {
             }
         }
         this.timer += dt;
-    };
-
-    Enemy.prototype.getX = function() {
-        return this.pos.x;
-    };
-
-    Enemy.prototype.getY = function() {
-        return this.pos.y;
-    };
-
-    Enemy.prototype.isLunging = function() {
-        return this.lunging;
     };
 
     // Return the enemy object for Require JS

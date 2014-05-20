@@ -84,19 +84,6 @@ define(["utils/mouseInput", "utils/utils", "../lib/Vector2D"], function(mouse, u
         }
     };
 
-    // Accessor methods
-    Player.prototype.getX = function() {
-        return this.pos.x;
-    };
-
-    Player.prototype.getY = function() {
-        return this.pos.y;
-    };
-
-    Player.prototype.isLunging = function() {
-        return this.lunging;
-    };
-
     // Return the player object for Require JS
     return Player;
 
