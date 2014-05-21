@@ -1,4 +1,4 @@
-define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], function(utils, player, enemy, particleEmitter, particle) {
+define(["utils/utils", "player", "enemy", "particleEmitter", "particle", "highScore"], function(utils, player, enemy, particleEmitter, particle, scores) {
 
     var enemies = [];
     var emitters = [];
@@ -6,11 +6,15 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
     var timer = 0;
     var time_display = 0;
     var score = 0;
+    var highScore = 0;
+    var bestTime = 0;
     var playing = true;
 
     function load(g) {
         // enemies.push(new enemy());
         g.font = "20px Lucida Sans Unicode";
+        highScore = scores.getScore();
+        bestTime = scores.getTime();
     }
 
     function draw(g) {
@@ -28,12 +32,13 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
         g.fillStyle = "rgb(0,0,0)";
         g.fillText("Score: " + score, 20, 50);
         g.fillText("Time: " + time_display.toFixed(2) + "s", 20, 30);
+        g.fillText("High Score: " + highScore, 600, 30);
+        g.fillText("Best Time: " + bestTime + "s", 600, 50);
         if (!playing) {
             g.fillStyle = "rgba(0,0,0,0.5)";
             g.fillRect(0, 0, utils.canvas.width, utils.canvas.height);
             g.fillStyle = "rgb(255,0,0)";
             g.fillText("You DEAD!", 400, 400);
-
         }
 
     }
@@ -52,6 +57,8 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
                         score += 1;
                     } else if (enemies[i].currentState == enemies[i].state.LUNGING && !Player.lunging) {
                         playing = false;
+                        if (score > highScore) scores.saveScore(score);
+                        if (time_display > bestTime) scores.saveTime(time_display.toFixed(2));
                     }
                 }
 
