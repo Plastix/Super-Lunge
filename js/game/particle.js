@@ -35,8 +35,8 @@ define(["utils/utils", "../lib/Vector2D"], function(utils) {
 
     CloudParticle.prototype.draw = function(g) {
         if (!this.isExpired) {
-            g.fillStyle = "rgba(100,100,100," + (0.3 * (this.lifespan - this.timer)).toFixed(2) + ")";
-            utils.circle(g, this.pos.x, this.pos.y, 10);
+            g.fillStyle = "rgba(255,255,255," + (0.3 * (this.lifespan - this.timer)).toFixed(2) + ")";
+            utils.circle(g, this.pos.x, this.pos.y, 15);
         }
     };
 
