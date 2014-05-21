@@ -7,17 +7,17 @@ define(["utils/mouseInput", "utils/utils", "../lib/Vector2D"], function(mouse, u
         this.oldPos = new Vector2D(0, 0);
         this.vel = new Vector2D(0, 0);
         this.lunging = false;
-        this.speed = 5;
-        this.lunging_speed = 25;
-        this.lunging_time = 0.4; //Time in seconds
-        this.cooldown_time = 0.3;
-        this.timer = this.cooldown_time;
+        this.SPEED = 5;
+        this.LUNGING_SPEED = 25;
+        this.LUNGING_TIME = 0.4; //Time in seconds
+        this.COOLDOWN_TIME = 0.3;
+        this.timer = this.COOLDOWN_TIME;
         this.angle = 0;
     }
 
     Player.prototype.draw = function(g) {
         if (this.lunging) { // Draw a streak while lunging
-            g.strokeStyle = "rgba(255,255,255," + (this.lunging_time - this.timer) + ")";
+            g.strokeStyle = "rgba(255,255,255," + (this.LUNGING_TIME - this.timer) + ")";
             g.lineWidth = 6;
             g.beginPath();
             g.moveTo(this.pos.x, this.pos.y);
@@ -50,11 +50,11 @@ define(["utils/mouseInput", "utils/utils", "../lib/Vector2D"], function(mouse, u
             this.vel = new Vector2D(mouse.x, mouse.y);
             this.vel.subtractEquals(this.pos);
             this.vel.unitEquals();
-            this.vel.multiplyEquals(this.speed);
+            this.vel.multiplyEquals(this.SPEED);
             this.angle = Math.atan2(mouse.x - this.pos.x, this.pos.y - mouse.y); // Update angle for aiming triangle
         } else {
             this.vel.multiplyEquals(0.9); // Ease velocity vector while lunging
-            if (this.timer > this.lunging_time)
+            if (this.timer > this.LUNGING_TIME)
                 this.lunging = false;
         }
 
@@ -75,9 +75,9 @@ define(["utils/mouseInput", "utils/utils", "../lib/Vector2D"], function(mouse, u
     };
 
     Player.prototype.mousePressed = function() {
-        if (this.timer > this.cooldown_time && !this.lunging) {
+        if (this.timer > this.COOLDOWN_TIME && !this.lunging) {
             this.vel.unitEquals();
-            this.vel.multiplyEquals(this.lunging_speed);
+            this.vel.multiplyEquals(this.LUNGING_SPEED);
             this.oldPos = new Vector2D(this.pos.x, this.pos.y); // Save position before lunging so we can draw a streak
             this.timer = 0;
             this.lunging = true;

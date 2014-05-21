@@ -14,15 +14,15 @@ define(["utils/utils"], function(utils) {
             WAITING: 2,
             LUNGING: 3,
         };
-        this.lunging_speed = 20;
-        this.lunging_time = 0.4;
-        this.lunging_delay = Math.random() + 1;
+        this.LUNGING_SPEED = 20;
+        this.LUNGING_TIME = 0.4;
+        this.LUNGING_DELAY = Math.random() + 1;
         this.timer = 0;
     }
 
     Enemy.prototype.draw = function(g) {
         if (this.currentState == this.state.LUNGING) { // Draw a streak while lunging
-            g.strokeStyle = "rgba(255,255,255," + (this.lunging_time - this.timer) + ")";
+            g.strokeStyle = "rgba(255,255,255," + (this.LUNGING_TIME - this.timer) + ")";
             g.lineWidth = 6;
             g.beginPath();
             g.moveTo(this.pos.x, this.pos.y);
@@ -59,7 +59,7 @@ define(["utils/utils"], function(utils) {
             this.vel.multiplyEquals(this.speed);
         } else {
             this.vel.multiplyEquals(0.9); // Ease velocity vector while lunging
-            if (this.timer > this.lunging_time) {
+            if (this.timer > this.LUNGING_TIME) {
                 this.currentState = this.state.TRACKING;
                 this.timer = 0;
             }
@@ -67,9 +67,9 @@ define(["utils/utils"], function(utils) {
         if (this.currentState == this.state.TRACKING || this.currentState == this.state.LUNGING) {
             this.pos.addEquals(this.vel); // Move if we're not waiting
         } else {
-            if (this.timer > this.lunging_delay) {
+            if (this.timer > this.LUNGING_DELAY) {
                 this.vel.unitEquals();
-                this.vel.multiplyEquals(this.lunging_speed);
+                this.vel.multiplyEquals(this.LUNGING_SPEED);
                 this.currentState = this.state.LUNGING;
                 this.timer = 0;
             }
