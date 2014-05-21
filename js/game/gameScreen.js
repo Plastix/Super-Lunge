@@ -3,8 +3,8 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
     var enemies = [];
     var emitters = [];
     var Player = new player();
-    var timer2 = 0;
-    var total_time = 0;
+    var timer = 0;
+    var time_display = 0;
     var score = 0;
     var playing = true;
 
@@ -27,7 +27,7 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
 
         g.fillStyle = "rgb(0,0,0)";
         g.fillText("Score: " + score, 20, 50);
-        g.fillText("Time: " + total_time.toFixed(2) + "s", 20, 30);
+        g.fillText("Time: " + time_display.toFixed(2) + "s", 20, 30);
         if (!playing) {
             g.fillStyle = "rgba(0,0,0,0.5)";
             g.fillRect(0, 0, utils.canvas.width, utils.canvas.height);
@@ -62,13 +62,13 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
                     emitters.splice(j, 1); // Remove enemy at index i
                 }
             }
-            if (timer2 > 2) {
+            if (timer > 2) {
                 enemies.push(new enemy());
                 emitters.push(new particleEmitter(enemies[i].pos.x, enemies[i].pos.y, 20, particle.cloudParticle, 2));
-                timer2 = 0;
+                timer = 0;
             }
-            timer2 += dt;
-            total_time += dt;
+            timer += dt;
+            time_display += dt;
 
         }
     }
