@@ -21,6 +21,14 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle", "highSc
         g.clearRect(0, 0, utils.canvas.width, utils.canvas.height);
         g.fillStyle = "rgb(200,200,200)";
         g.fillRect(0, 0, utils.canvas.width, utils.canvas.height);
+        g.strokeStyle = "rgb(150,150,150)";
+        g.lineWidth = 1;
+        for (var w = 0; w < utils.canvas.width; w += 50) {
+            utils.line(g, w, 0, w, utils.canvas.height);
+        }
+        for (var l = 0; l < utils.canvas.height; l += 50) {
+            utils.line(g, 0, l, utils.canvas.width, l);
+        }
         Player.draw(g);
         for (var i = 0; i < enemies.length; i++) {
             enemies[i].draw(g);

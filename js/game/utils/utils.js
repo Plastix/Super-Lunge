@@ -8,6 +8,13 @@ define(function() {
         g.fill();
     }
 
+    function line(g, x1, y1, x2, y2) {
+        g.beginPath();
+        g.moveTo(x1, y1);
+        g.lineTo(x2, y2);
+        g.stroke();
+    }
+
     function dist(x1, y1, x2, y2) {
         return Math.sqrt(Math.abs((x1 -= x2) * x1 + (y1 -= y2) * y1));
     }
@@ -22,6 +29,7 @@ define(function() {
         canvas: canvas,
         circle: circle,
         getRandom: getRandom,
+        line: line,
     };
 
 });

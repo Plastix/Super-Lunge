@@ -19,11 +19,7 @@ define(["utils/mouseInput", "utils/utils", "../lib/Vector2D"], function(mouse, u
         if (this.lunging) { // Draw a streak while lunging
             g.strokeStyle = "rgba(255,255,255," + (this.LUNGING_TIME - this.timer) + ")";
             g.lineWidth = 6;
-            g.beginPath();
-            g.moveTo(this.pos.x, this.pos.y);
-            g.lineTo(this.oldPos.x, this.oldPos.y);
-            g.closePath();
-            g.stroke();
+            utils.line(g, this.pos.x, this.pos.y, this.oldPos.x, this.oldPos.y);
         }
         g.fillStyle = "rgb(8,204,67)";
         utils.circle(g, this.pos.x, this.pos.y, 15);

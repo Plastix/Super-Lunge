@@ -24,11 +24,7 @@ define(["utils/utils"], function(utils) {
         if (this.currentState == this.state.LUNGING) { // Draw a streak while lunging
             g.strokeStyle = "rgba(255,255,255," + (this.LUNGING_TIME - this.timer) + ")";
             g.lineWidth = 6;
-            g.beginPath();
-            g.moveTo(this.pos.x, this.pos.y);
-            g.lineTo(this.oldPos.x, this.oldPos.y);
-            g.closePath();
-            g.stroke();
+            utils.line(g, this.pos.x, this.pos.y, this.oldPos.x, this.oldPos.y);
         }
         if (this.currentState == this.state.WAITING)
             g.fillStyle = "rgb(242,238,10)";
