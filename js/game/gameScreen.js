@@ -44,13 +44,13 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle"], functi
             for (var i = 0; i < enemies.length; i++) {
                 enemies[i].update(dt, Player);
                 if (utils.dist(Player.pos.x, Player.pos.y, enemies[i].pos.x, enemies[i].pos.y) < 15) {
-                    if (Player.lunging && !enemies[i].lunging) {
+                    if (Player.lunging && enemies[i].currentState != enemies[i].state.LUNGING) {
                         emitters.push(new particleEmitter(enemies[i].pos.x, enemies[i].pos.y, 10, particle.particle, 1));
                         enemies[i] = null;
                         enemies.splice(i, 1); // Remove enemy at index i
                         i--;
                         score += 1;
-                    } else if (enemies[i].lunging && !Player.lunging) {
+                    } else if (enemies[i].currentState == enemies[i].state.LUNGING && !Player.lunging) {
                         playing = false;
                     }
                 }
