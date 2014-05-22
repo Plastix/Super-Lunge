@@ -11,7 +11,8 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle", "highSc
     var playing = true;
 
     function load(g) {
-        // enemies.push(new enemy());
+        enemies.push(new enemy());
+        emitters.push(new particleEmitter(enemies[0].pos.x, enemies[0].pos.y, 20, particle.cloudParticle, 2));
         g.font = "20px Lucida Sans Unicode";
         highScore = scores.getScore();
         bestTime = scores.getTime();
@@ -77,7 +78,7 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle", "highSc
                     emitters.splice(j, 1); // Remove enemy at index i
                 }
             }
-            if (timer > 2) {
+            if (timer > 5 / (Math.floor(time_display / 10) + 1)) {
                 enemies.push(new enemy());
                 emitters.push(new particleEmitter(enemies[i].pos.x, enemies[i].pos.y, 20, particle.cloudParticle, 2));
                 timer = 0;
