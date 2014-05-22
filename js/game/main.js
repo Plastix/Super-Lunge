@@ -1,4 +1,4 @@
-require(["gameScreen"], function(gameScreen) {
+require(["gameScreen", "menuScreen"], function(gameScreen, menuScreen) {
 
     // requestAnimationFrame polyfill by Erik Möller. Fixes from Paul Irish and Tino Zijdel
     // MIT license

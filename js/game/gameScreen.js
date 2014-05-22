@@ -13,7 +13,7 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle", "highSc
     function load(g) {
         enemies.push(new enemy());
         emitters.push(new particleEmitter(enemies[0].pos.x, enemies[0].pos.y, 20, particle.cloudParticle, 2));
-        g.font = "20px Lucida Sans Unicode";
+        g.font = "40px BebasNeue Light";
         highScore = scores.getScore();
         bestTime = scores.getTime();
     }
@@ -37,17 +37,21 @@ define(["utils/utils", "player", "enemy", "particleEmitter", "particle", "highSc
         for (var j = 0; j < emitters.length; j++) {
             emitters[j].draw(g);
         }
-
+        g.font = "40px BebasNeue Light";
+        g.textAlign = "left";
         g.fillStyle = "rgb(0,0,0)";
-        g.fillText("Score: " + score, 20, 50);
-        g.fillText("Time: " + time_display.toFixed(2) + "s", 20, 30);
-        g.fillText("High Score: " + highScore, 600, 30);
-        g.fillText("Best Time: " + bestTime + "s", 600, 50);
+        g.fillText("Score: " + score, 10, 75);
+        g.fillText("Time: " + time_display.toFixed(2) + "s", 10, 40);
+        g.textAlign = "right";
+        g.fillText("High Score: " + highScore, utils.canvas.width - 10, 75);
+        g.fillText("Best Time: " + bestTime + "s", utils.canvas.width - 10, 40);
         if (!playing) {
             g.fillStyle = "rgba(0,0,0,0.5)";
             g.fillRect(0, 0, utils.canvas.width, utils.canvas.height);
             g.fillStyle = "rgb(255,0,0)";
-            g.fillText("You DEAD!", 400, 400);
+            g.textAlign = "center";
+            g.font = "100px BebasNeue Bold";
+            g.fillText("You Died!", utils.canvas.width / 2, utils.canvas.height / 2);
         }
 
     }
