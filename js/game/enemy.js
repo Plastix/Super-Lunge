@@ -22,7 +22,7 @@ define(["utils/utils"], function(utils) {
 
     Enemy.prototype.draw = function(g) {
         if (this.currentState == this.state.LUNGING) { // Draw a streak while lunging
-            g.strokeStyle = "rgba(255,255,255," + (this.LUNGING_TIME - this.timer) + ")";
+            g.strokeStyle = "rgba(255,255,255," + (this.LUNGING_TIME - this.timer).toFixed(2) + ")";
             g.lineWidth = 6;
             utils.line(g, this.pos.x, this.pos.y, this.oldPos.x, this.oldPos.y);
         }

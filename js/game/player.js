@@ -17,7 +17,7 @@ define(["utils/mouseInput", "utils/utils", "../lib/Vector2D"], function(mouse, u
 
     Player.prototype.draw = function(g) {
         if (this.lunging) { // Draw a streak while lunging
-            g.strokeStyle = "rgba(255,255,255," + (this.LUNGING_TIME - this.timer) + ")";
+            g.strokeStyle = "rgba(255,255,255," + (this.LUNGING_TIME - this.timer).toFixed(2) + ")";
             g.lineWidth = 6;
             utils.line(g, this.pos.x, this.pos.y, this.oldPos.x, this.oldPos.y);
         }
@@ -54,7 +54,7 @@ define(["utils/mouseInput", "utils/utils", "../lib/Vector2D"], function(mouse, u
                 this.lunging = false;
         }
 
-        if (utils.dist(this.pos.x, this.pos.y, mouse.x, mouse.y) > 5 || this.lunging) {
+        if (utils.dist(this.pos.x, this.pos.y, mouse.x, mouse.y) > 20 || this.lunging) {
             this.pos.addEquals(this.vel);
         }
 
