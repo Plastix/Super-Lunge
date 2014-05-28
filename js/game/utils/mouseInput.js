@@ -21,18 +21,17 @@ define(["utils/utils"], function(utils) {
         mouse.pressed = false;
     }, false);
 
-    utils.scanvas.addEventListener('touchmove', function(e){
-      mouse.x = e.touches[0].pageX - rect.left;
-      mouse.y = e.touches[0].pageY - rect.top;
+    utils.canvas.addEventListener('touchmove', function(e) {
+        mouse.x = e.touches[0].pageX - rect.left;
+        mouse.y = e.touches[0].pageY - rect.top;
     }, false);
 
-    utils.canvas.addEventListener('touchstart', function(e){
-      mouse.pressed = true;
+    utils.canvas.addEventListener('touchstart', function(e) {
+        mouse.pressed = true;
     }, false);
 
-    utils.canvas.addEventListener('touchend', function(e){
-      mouse.pressed = false;
-
+    utils.canvas.addEventListener('touchend', function(e) {
+        mouse.pressed = false;
     }, false);
 
     return mouse;
