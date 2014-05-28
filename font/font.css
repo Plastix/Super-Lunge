@@ -11,3 +11,13 @@ font-family: 'BebasNeue Bold';
 font-family: 'BebasNeue Light';
 	src: url('BebasNeue Light.otf');
 }
+
+    html, body {
+      width:  100%;
+      height: 100%;
+      margin: 0px;
+    overflow: hidden
+    }
+    canvas{
+        display:block;
+    }

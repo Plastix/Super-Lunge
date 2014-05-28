@@ -32,9 +32,9 @@ require(["gameScreen", "menuScreen"], function(gameScreen, menuScreen) {
     var surface = canvas.getContext("2d");
     var currentScreen = gameScreen;
 
-    canvas.setAttribute("width", 800);
-    canvas.setAttribute("height", 800);
-    canvas.setAttribute("style", "border:0px; padding:0px; margin:0px");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     function start() {
         var lastFrame = Date.now();
@@ -57,6 +57,14 @@ require(["gameScreen", "menuScreen"], function(gameScreen, menuScreen) {
     }, false);
 
     document.addEventListener("mouseUp", function() {
+        currentScreen.mouseReleased();
+    }, false);
+
+    canvas.addEventListener('touchstart', function(e){
+        currentScreen.mousePressed();
+    }, false);
+
+    canvas.addEventListener('touchend', function(e){
         currentScreen.mouseReleased();
     }, false);
 
